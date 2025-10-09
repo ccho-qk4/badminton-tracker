@@ -236,7 +236,7 @@ export default function App() {
                   value={playerName}
                   onChange={(e) => setPlayerName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-gray-400"
                   autoFocus
                 />
               </div>
@@ -251,7 +251,7 @@ export default function App() {
                     value={partnerName}
                     onChange={(e) => setPartnerName(e.target.value)}
                     placeholder="Enter your partner's name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-gray-400"
                   />
                 </div>
               )}
@@ -265,7 +265,7 @@ export default function App() {
                   value={opponentName}
                   onChange={(e) => setOpponentName(e.target.value)}
                   placeholder={selectedMatchType === 'doubles' ? "Enter opponent 1's name" : "Enter opponent's name"}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 border-2 border-teal-200 bg-teal-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder-gray-400"
                 />
               </div>
 
@@ -279,7 +279,7 @@ export default function App() {
                     value={opponent2Name}
                     onChange={(e) => setOpponent2Name(e.target.value)}
                     placeholder="Enter opponent 2's name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 border-2 border-teal-200 bg-teal-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder-gray-400"
                   />
                 </div>
               )}
@@ -387,7 +387,7 @@ export default function App() {
                       value={rallyLength}
                       onChange={(e) => setRallyLength(e.target.value)}
                       placeholder="Enter number of shots"
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="flex-1 px-4 py-2 border-2 border-blue-200 bg-blue-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
                       autoFocus
                     />
                     <button
@@ -555,7 +555,7 @@ export default function App() {
                               type="number"
                               value={editPlayerScore}
                               onChange={(e) => setEditPlayerScore(e.target.value)}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                              className="w-full px-3 py-2 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                               min="0"
                             />
                           </div>
@@ -565,7 +565,7 @@ export default function App() {
                               type="number"
                               value={editOpponentScore}
                               onChange={(e) => setEditOpponentScore(e.target.value)}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                              className="w-full px-3 py-2 border-2 border-gray-200 bg-gray-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
                               min="0"
                             />
                           </div>
