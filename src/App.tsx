@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Trophy, User, Users, Trash2, TrendingUp, Calendar, Edit2, X, Check } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+// Lazy load the performance chart component to improve initial load time
+const PerformanceChart = lazy(() => import('./PerformanceChart'));
 
 interface Rally {
   winner: 'player' | 'opponent';
@@ -236,7 +238,7 @@ export default function App() {
                   value={playerName}
                   onChange={(e) => setPlayerName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full px-4 py-3 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-gray-400"
+                  className="w-full px-4 py-3 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-gray-400 text-gray-900"
                   autoFocus
                 />
               </div>
@@ -251,7 +253,7 @@ export default function App() {
                     value={partnerName}
                     onChange={(e) => setPartnerName(e.target.value)}
                     placeholder="Enter your partner's name"
-                    className="w-full px-4 py-3 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-gray-400"
+                    className="w-full px-4 py-3 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 placeholder-gray-400 text-gray-900"
                   />
                 </div>
               )}
@@ -265,7 +267,7 @@ export default function App() {
                   value={opponentName}
                   onChange={(e) => setOpponentName(e.target.value)}
                   placeholder={selectedMatchType === 'doubles' ? "Enter opponent 1's name" : "Enter opponent's name"}
-                  className="w-full px-4 py-3 border-2 border-teal-200 bg-teal-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder-gray-400"
+                  className="w-full px-4 py-3 border-2 border-teal-200 bg-teal-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder-gray-400 text-gray-900"
                 />
               </div>
 
@@ -279,7 +281,7 @@ export default function App() {
                     value={opponent2Name}
                     onChange={(e) => setOpponent2Name(e.target.value)}
                     placeholder="Enter opponent 2's name"
-                    className="w-full px-4 py-3 border-2 border-teal-200 bg-teal-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder-gray-400"
+                    className="w-full px-4 py-3 border-2 border-teal-200 bg-teal-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 placeholder-gray-400 text-gray-900"
                   />
                 </div>
               )}
@@ -387,7 +389,7 @@ export default function App() {
                       value={rallyLength}
                       onChange={(e) => setRallyLength(e.target.value)}
                       placeholder="Enter number of shots"
-                      className="flex-1 px-4 py-2 border-2 border-blue-200 bg-blue-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+                      className="flex-1 px-4 py-2 border-2 border-blue-200 bg-blue-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-900"
                       autoFocus
                     />
                     <button
@@ -508,17 +510,13 @@ export default function App() {
                   <TrendingUp className="w-6 h-6 text-emerald-600" />
                   Performance History
                 </h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={getChartData()}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="match" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="yourScore" fill="#10b981" name="Your Score" />
-                    <Bar dataKey="opponentScore" fill="#6b7280" name="Opponent" />
-                  </BarChart>
-                </ResponsiveContainer>
+                <Suspense fallback={
+                  <div className="flex items-center justify-center h-[300px]">
+                    <div className="text-gray-500">Loading chart...</div>
+                  </div>
+                }>
+                  <PerformanceChart data={getChartData()} />
+                </Suspense>
               </div>
             )}
 
@@ -555,7 +553,7 @@ export default function App() {
                               type="number"
                               value={editPlayerScore}
                               onChange={(e) => setEditPlayerScore(e.target.value)}
-                              className="w-full px-3 py-2 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                              className="w-full px-3 py-2 border-2 border-emerald-200 bg-emerald-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-900"
                               min="0"
                             />
                           </div>
@@ -565,7 +563,7 @@ export default function App() {
                               type="number"
                               value={editOpponentScore}
                               onChange={(e) => setEditOpponentScore(e.target.value)}
-                              className="w-full px-3 py-2 border-2 border-gray-200 bg-gray-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
+                              className="w-full px-3 py-2 border-2 border-gray-200 bg-gray-50/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-gray-900"
                               min="0"
                             />
                           </div>
